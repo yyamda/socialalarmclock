@@ -177,7 +177,7 @@ struct HomePageView: View {
                             }
                         }
                     }
-                                    .frame(maxHeight: 250)
+                    .frame(maxHeight: 250)
                                 
                                 }
                             }
@@ -202,13 +202,11 @@ struct HomePageView: View {
                 
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        // Add your button action here
-                    })  {
-                        Image("FriendsIcon")
-                            .resizable()
-                            .frame(width: 65, height: 40)
-                        }
+                        NavigationLink(destination: FriendsPageView().navigationBarBackButtonHidden(true)) {
+                            Image("FriendsIcon")
+                                .resizable()
+                                .frame(width: 50, height: 35)
+                            }
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {

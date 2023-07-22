@@ -135,6 +135,7 @@ struct UserAccountView: View {
                                     Spacer()
                                 }
                                 .frame(width: 390, height: 60)
+                                .padding(.vertical, 2)
 //                                .border(.white, width: 2)
                                 
                             }
@@ -164,6 +165,7 @@ struct UserAccountView: View {
                                         .frame(width: 25, height: 4)
                                         .foregroundColor(.gray)
                                 }
+                                .padding(.vertical, 3)
                             }
                         
                         }
@@ -196,7 +198,7 @@ struct UserAccountView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)) {
                         Image("CogButton")
                             .resizable()
                             .frame(width: 45, height: 45)
