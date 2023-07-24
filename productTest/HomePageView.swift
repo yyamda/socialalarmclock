@@ -205,7 +205,7 @@ struct HomePageView: View {
                         NavigationLink(destination: FriendsPageView().navigationBarBackButtonHidden(true)) {
                             Image("FriendsIcon")
                                 .resizable()
-                                .frame(width: 50, height: 35)
+                                .frame(width: 55, height: 35)
                             }
                     }
                     

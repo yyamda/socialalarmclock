@@ -10,6 +10,11 @@ import SwiftUI
 struct FriendsPageView: View {
     @State private var myActivityTab = true
     @State private var newWakeOpen = false
+    
+    @State private var searchText = ""
+    @State private var suggestedOpen = false
+    @State private var requestsOpen = false
+    
     var body: some View {
         NavigationView {
             
@@ -163,7 +168,7 @@ struct FriendsPageView: View {
                                         }
                                     }
                                 }
-                                .frame(maxHeight: 150)
+                                .frame(maxHeight: 200)
                             }
                             
                             Rectangle()
@@ -224,8 +229,273 @@ struct FriendsPageView: View {
                     }
                 }
                 if (!myActivityTab) {
-                    Text("Nope not me")
-                        .font(.system(size: 26, weight: .bold))
+                    VStack {
+                        HStack {
+                            Image("SearchIcon")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .border(.black, width: 2)
+                            
+                            TextField("Search or add friends..", text: $searchText)
+                                .padding()
+                                .frame(width: 350, height: 35)
+                                .background(Color.white)
+                                .foregroundColor(Color.gray)
+                                .cornerRadius(60)
+                                .autocapitalization(.none)
+                        }
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+//                        .border(.white, width: 2)
+                        
+                        VStack {
+                            Button(action: {
+                                suggestedOpen.toggle()
+                            }) {
+                                HStack {
+                                    Text("Suggested")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .foregroundColor(Color.white)
+                                    
+                                    Spacer()
+                                    
+                                    if (suggestedOpen) {
+                                        Image("GrayDownToggle")
+                                            .resizable()
+                                            .frame(width: 35, height: 27)
+                                    }
+                                    if (!suggestedOpen) {
+                                        Image("GrayDownToggle")
+                                            .resizable()
+                                            .frame(width: 35, height: 27)
+                                            .rotationEffect(.degrees(180))
+                                    }
+                            }
+                        }
+//                            .border(.white, width: 2)
+                            
+                    
+                            if suggestedOpen {
+                                ScrollView {
+                                    LazyVStack(spacing: 0) {
+                                        ForEach(0 ... 10, id:\.self) {
+                                            user in
+                                            HStack {
+                                                    Image("Lucas")
+                                                        .renderingMode(.original)
+                                                        .resizable()
+                                                        .frame(width: 40, height: 40)
+                                                        .clipShape(Circle())
+                                                        .padding(.trailing, 10)
+                                                        
+                                                    HStack {
+                                                        VStack(alignment: .leading) {
+                                                            Text("Rachel Ong")
+                                                                .font(.system(size: 18, weight: .semibold))
+                                                                .foregroundColor(.white)
+                                                                .padding(.bottom, 1)
+                                                            
+                                                            Text("3 MUTUAL FRIENDS")
+                                                                .font(.system(size: 10))
+                                                                .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                        }
+                                                        Spacer()
+                                                    }
+                                                    .frame(width: 200, height: 40)
+//                                                    .border(.white, width: 2)
+                                                    
+                                                    Spacer()
+                                                    Button(action: {
+                                                        // action here
+                                                    }) {
+                                                        Text("+ add")
+                                                            .font(.system(size: 15, weight: .bold))
+                                                            .foregroundColor(Color.gray)
+                                                            .frame(width: 45, height: 40)
+                                                            .background(Color.clear)
+                                                            .cornerRadius(40)
+                                                        
+//                                                            .border(.white, width: 2)
+                                                    }
+                                                }
+                                                .frame(width: 380, height: 60)
+                                                .background(.black)
+                                            
+//                                                .border(.white, width: 2)
+                                                
+                                        }
+                                    }
+                                }
+                                .frame(maxHeight: 150)
+                                .padding(.bottom, 10)
+                            }
+                            
+                            Rectangle()
+                                .frame(width: 380, height: 3)
+                                .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+
+                        }
+                        VStack {
+                            Button(action: {
+                                requestsOpen.toggle()
+                            }) {
+                                HStack {
+                                    Text("Friend Requests")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .foregroundColor(Color.white)
+                                    
+                                    Spacer()
+                                    
+                                    if (requestsOpen) {
+                                        Image("GrayDownToggle")
+                                            .resizable()
+                                            .frame(width: 35, height: 27)
+                                    }
+                                    if (!requestsOpen) {
+                                        Image("GrayDownToggle")
+                                            .resizable()
+                                            .frame(width: 35, height: 27)
+                                            .rotationEffect(.degrees(180))
+                                    }
+                            }
+                        }
+//                            .border(.white, width: 2)
+                            
+                            
+                            
+                            if requestsOpen {
+                                ScrollView {
+                                    LazyVStack(spacing: 0) {
+                                        ForEach(0 ... 10, id:\.self) {
+                                            user in
+                                            HStack {
+                                                    Image("Lucas")
+                                                        .renderingMode(.original)
+                                                        .resizable()
+                                                        .frame(width: 40, height: 40)
+                                                        .clipShape(Circle())
+                                                        .padding(.trailing, 10)
+                                                        
+                                                    HStack {
+                                                        VStack(alignment: .leading) {
+                                                            Text("Lucas Omori")
+                                                                .font(.system(size: 18, weight: .semibold))
+                                                                .foregroundColor(.white)
+                                                                .padding(.bottom, 1)
+                                                            
+                                                            Text("lomori212")
+                                                                .font(.system(size: 14))
+                                                                .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                        }
+                                                        Spacer()
+                                                    }
+                                                    .frame(width: nil, height: 45)
+                                                
+                                                Spacer()
+                                                HStack {
+                                                    Button(action: {
+                                                        // action here
+                                                    }) {
+                                                        Text("Accept")
+                                                            .frame(width: 75, height: 40)
+                                                            .font(.system(size: 15, weight: .bold))
+                                                            .background(Color(red: 0.02, green: 0.62, blue: 0.66))
+                                                            .foregroundColor(Color.black)
+                                                            .cornerRadius(40)
+                                                    }
+                                                    Button(action: {
+                                                        // action here
+                                                    }) {
+                                                        Text("Decline")
+                                                            .frame(width: 75, height: 40)
+                                                            .font(.system(size: 15, weight: .bold))
+                                                            .background(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                            .foregroundColor(Color.black)
+                                                            .cornerRadius(40)
+
+                                                    }
+                                                }
+                                                   
+                                                }
+                                                .frame(width: 390, height: 60)
+                                                .background(.black)
+
+                                                
+                                        }
+                                    }
+                                }
+                                .frame(maxHeight: 200)
+                                .padding(.bottom, 10)
+                            }
+                            Rectangle()
+                                .frame(width: 380, height: 3)
+                                .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+
+                        }
+                        VStack {
+                            HStack {
+                                Text("My Friends")
+                                    .font(.system(size: 20, weight: .bold))
+
+                                Text("54")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(Color.gray)
+                                
+                                Spacer()
+                            }
+                            ScrollView {
+                                LazyVStack(spacing: 0) {
+                                    ForEach(0 ... 10, id:\.self) {
+                                        user in
+                                        HStack {
+                                                Image("Lucas")
+                                                    .renderingMode(.original)
+                                                    .resizable()
+                                                    .frame(width: 40, height: 40)
+                                                    .clipShape(Circle())
+                                                    .padding(.trailing, 10)
+                                                    
+                                                HStack {
+                                                    VStack(alignment: .leading) {
+                                                        Text("Lucas Omori")
+                                                            .font(.system(size: 18, weight: .semibold))
+                                                            .foregroundColor(.white)
+                                                            .padding(.bottom, 1)
+                                                        
+                                                        Text("lomori212")
+                                                            .font(.system(size: 14))
+                                                            .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                    }
+                                                    Spacer()
+                                                }
+                                                .frame(width: nil, height: 45)
+                                            
+                                                Spacer()
+                                            
+                                            HStack(spacing: 3) {
+                                                Text("Woke me:")
+                                                    .font(.system(size: 14, weight: .semibold))
+                                                    .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                Text("3")
+                                                    .font(.system(size: 14, weight: .semibold))
+                                                    .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                Text("times")
+                                                    .font(.system(size: 14, weight: .semibold))
+                                                    .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                            }
+                                            .padding(.trailing, 20)
+                                            
+                                               
+                                            }
+                                            .frame(width: 390, height: 60)
+                                            .background(.black)
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                    
                 }
                 
                 Spacer()
