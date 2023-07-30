@@ -34,13 +34,54 @@ struct SignUpView: View {
 
                 
                         VStack {
-                            
+                            HStack {
+                                VStack {
+                                    Text("First")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .frame(width: 130, alignment: .leading)
+                                        .foregroundColor(.white)
+                                        .padding(.top, 20)
+                                        
+                                    
+                                    TextField("", text: $viewModel.first)
+                                    //                            TextField("", text: $username)
+                                        .padding()
+                                        .frame(width: 130, height: 40)
+                                        .background(Color.white)
+                                        .cornerRadius(60)
+                                        .padding(.top, 10)
+                                        .padding(.bottom, 20)
+                                        .autocapitalization(.none)
+                                }
+                                .padding(.trailing, 20)
+
+                                VStack {
+                                    Text("Last")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .frame(width: 130, alignment: .leading)
+                                        .foregroundColor(.white)
+                                        .padding(.top, 20)
+                                        .padding(.horizontal, 10)
+                                    
+                                    TextField("", text: $viewModel.last)
+                                    //                            TextField("", text: $username)
+                                        .padding()
+                                        .frame(width: 130, height: 40)
+                                        .background(Color.white)
+                                        .cornerRadius(60)
+                                        .padding(.top, 10)
+                                        .padding(.bottom, 20)
+                                        .autocapitalization(.none)
+                                }
+                                
+                            }
                             Text("Username")
                                 .font(.system(size: 20, weight: .bold))
                                 .frame(width: 280, alignment: .leading)
                                 .foregroundColor(.white)
                                 .padding(.top, 40)
                                 .padding(.horizontal, 30)
+                            
                             
                             TextField("", text: $viewModel.username)
 //                            TextField("", text: $username)

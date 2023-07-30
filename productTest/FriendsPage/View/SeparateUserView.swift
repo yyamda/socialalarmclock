@@ -13,6 +13,9 @@ struct SeparateUserView: View {
     @State private var callsReceivedOpen = false
     @State private var callsSentOpen = false
     
+    @StateObject var viewModel = SearchViewModel()
+    let separateUser: User
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -26,9 +29,9 @@ struct SeparateUserView: View {
                     
                     // Full Name + User Info
                     VStack {
-                        Text("Tyler McNierney")
+                        Text(separateUser.first)
                             .font(.system(size: 32, weight: .bold))
-                        Text("tydagod2")
+                        Text(separateUser.username)
                             .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
                             .font(.system(size: 20, weight: .bold))
                     }
@@ -81,7 +84,7 @@ struct SeparateUserView: View {
                         // Friend Stat Text
                         VStack {
                             HStack {
-                                Text("yyamada20")
+                                Text(separateUser.first)
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
                                 Text("woke you:")
@@ -99,7 +102,7 @@ struct SeparateUserView: View {
                                 Text("You woke")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
-                                Text("ytydagod2:")
+                                Text("\(separateUser.username):")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
                                 Text("0")
@@ -147,7 +150,7 @@ struct SeparateUserView: View {
                                 callsReceivedOpen.toggle()
                             }) {
                                 HStack {
-                                    Text("Wake Up Calls received from tydagod2")
+                                    Text("Wake Up Calls received from \(separateUser.username)")
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(Color.white)
                                         .frame(width: 340, height: 30)
@@ -238,7 +241,7 @@ struct SeparateUserView: View {
                                 callsSentOpen.toggle()
                             }) {
                                 HStack {
-                                    Text("Wake Up Calls received from tydagod2")
+                                    Text("Wake Up Calls received from \(separateUser.username)")
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(Color.white)
                                         .frame(width: 340, height: 30)
@@ -350,17 +353,6 @@ struct SeparateUserView: View {
             .navigationBarTitle (Text("Wake Me Up!!"), displayMode: .inline)
             .navigationBarTitleDisplayMode(.inline)
             .font(.largeTitle)
-            
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-//                        Image("BackButton")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                    }
-//                    
-//                }
-//            }
         }
         .environment(\.colorScheme, .dark)
     }
@@ -368,6 +360,6 @@ struct SeparateUserView: View {
 
 struct SeparateUserView_Previews: PreviewProvider {
     static var previews: some View {
-        SeparateUserView()
+        SeparateUserView(separateUser: User.MOCK_USERS[0])
     }
 }

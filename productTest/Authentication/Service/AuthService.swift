@@ -30,6 +30,7 @@ class AuthService {
             // firebase function to create a user in the Authentication
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
+            try await loadUserData()
         
         } catch {
             // code for when auth().createUser doesn't work
@@ -37,31 +38,36 @@ class AuthService {
         }
     }
     
-    @MainActor
+    
     // Used during "Sign Up" User
-    func createUser(email: String, password: String, username: String) async throws {
-//        print("Email is \(email)")
-//        print("Password is \(password)")
-//        print("username is \(username)")
+    @MainActor
+    func createUser(email: String, password: String, username: String, first: String, last: String) async throws {
         do {
+            print("I tried")
+            print("I tried")
+            print("I tried")
+            print("I tried")
             // firebase function to create a user in the Authentication
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
             
+            
             // storing userData into the Database (separate from Authentication)
-            await uploadUserData(uid: result.user.uid, username: username, email: email)
+            await uploadUserData(uid: result.user.uid, username: username, email: email, first: first, last: last)
+            
+            print("DEBUG: Successfully signed in")
         
         } catch {
             // code for when auth().createUser doesn't work
             print("DEBUG: Failed to register user with error \(error.localizedDescription)")
         }
     }
-    
+    @MainActor
     func loadUserData() async throws {
-        
+       
         // fetches currentUser (nil or a user)
         self.userSession = Auth.auth().currentUser
-        print("DEBUG: HELLOOO userSession is enabled")
+        print("DEBUG: User Session is \(userSession)")
         
         // fetches current userId from userSession
         guard let currentUid = userSession?.uid else { return }
@@ -81,11 +87,14 @@ class AuthService {
         try? Auth.auth().signOut()
         // change UserSession so UI (frontend) knows user has signed out
         self.userSession = nil
+        self.currentUser = nil
         
     }
     
-    private func uploadUserData(uid: String, username: String, email: String) async {
-        let user = User(id: uid, username: username, email: email)
+    private func uploadUserData(uid: String, username: String, email: String, first: String, last: String) async {
+        print("Creating User Data")
+        let user = User(id: uid, username: username, email: email, first: first, last: last)
+        self.currentUser = user
         guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
         
         try? await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)

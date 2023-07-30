@@ -203,7 +203,7 @@ struct HomePageView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: UserAccountView(user: user).navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: FriendsPageView(user: user).navigationBarBackButtonHidden(true)) {
                         Image("FriendsIcon")
                             .resizable()
                             .frame(width: 55, height: 35)

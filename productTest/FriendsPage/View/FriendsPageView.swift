@@ -14,8 +14,12 @@ struct FriendsPageView: View {
     @State private var searchText = ""
     @State private var suggestedOpen = false
     @State private var requestsOpen = false
+    let user: User
+    
+    @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
+        
         NavigationView {
             
             VStack {
@@ -278,7 +282,7 @@ struct FriendsPageView: View {
                             if suggestedOpen {
                                 ScrollView {
                                     LazyVStack(spacing: 0) {
-                                        ForEach(0 ... 10, id:\.self) {
+                                        ForEach(viewModel.users) {
                                             user in
                                             HStack {
                                                     Image("Lucas")
@@ -289,16 +293,27 @@ struct FriendsPageView: View {
                                                         .padding(.trailing, 10)
                                                         
                                                     HStack {
-                                                        VStack(alignment: .leading) {
-                                                            Text("Rachel Ong")
-                                                                .font(.system(size: 18, weight: .semibold))
-                                                                .foregroundColor(.white)
-                                                                .padding(.bottom, 1)
-                                                            
-                                                            Text("3 MUTUAL FRIENDS")
-                                                                .font(.system(size: 10))
-                                                                .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                        NavigationLink(destination: SeparateUserView(separateUser: user).navigationBarBackButtonHidden(true))
+                                                        {
+                                                            VStack(alignment: .leading) {
+                                                                HStack {
+                                                                    Text(user.first)
+                                                                        .font(.system(size: 18, weight: .semibold))
+                                                                        .foregroundColor(.white)
+                                                                        .padding(.bottom, 1)
+                                                                    Text(user.last)
+                                                                        .font(.system(size: 18, weight: .semibold))
+                                                                        .foregroundColor(.white)
+                                                                        .padding(.bottom, 1)
+
+                                                                }
+                                                                
+                                                                Text("3 MUTUAL FRIENDS")
+                                                                    .font(.system(size: 10))
+                                                                    .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
+                                                            }
                                                         }
+                                                        
                                                         Spacer()
                                                     }
                                                     .frame(width: 200, height: 40)
@@ -508,15 +523,15 @@ struct FriendsPageView: View {
             .font(.largeTitle)
             
             .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-//                        Image("BackButton")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                            .rotationEffect(.degrees(180))
-//                    }
-//                    
-//                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: HomePageView(user: user).navigationBarBackButtonHidden(true)) {
+                        Image("BackButton")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .rotationEffect(.degrees(180))
+                    }
+                    
+                }
                 
             }
 
@@ -529,6 +544,6 @@ struct FriendsPageView: View {
 
 struct FriendsPageView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendsPageView()
+        FriendsPageView(user: User.MOCK_USERS[0])
     }
 }
