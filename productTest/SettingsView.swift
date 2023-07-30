@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         NavigationView {
-            
             VStack {
                 HStack {
                     Text("Settings")
@@ -63,10 +62,22 @@ struct SettingsView: View {
                     Text("Privacy Settings")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.gray)
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 20)
                         .padding(.leading, 10)
                     Spacer()
                 }
+                
+                Button(action: {
+                    AuthService.shared.signout()
+                }) {
+                    Text("Log Out")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(Color.white)
+                        .frame(width: 200, height: 60)
+                        .background(Color.clear)
+                        .overlay(RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.white, lineWidth: 3))
+                    }
                 
                 Spacer()
                 

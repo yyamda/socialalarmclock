@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State private var username = ""
-    @State private var password = ""
+//    @State private var username = ""
+//    @State private var password = ""
+//    @State private var email = ""
     @State private var showingLoginScreen = false
+    
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var viewModel: RegistrationViewModel
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -26,23 +31,37 @@ struct SignUpView: View {
                         .padding(.vertical, 15)
                         .padding(.leading, 15)
                         .padding(.bottom, 5)
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(Color.clear)
-                            .frame(width: 340, height: 400)
-                            .overlay(RoundedRectangle(cornerRadius: 60)
-                                .stroke(Color.white, lineWidth: 5)
-                            )
-                    
+
+                
                         VStack {
-                            Text("Email")
+                            
+                            Text("Username")
                                 .font(.system(size: 20, weight: .bold))
                                 .frame(width: 280, alignment: .leading)
                                 .foregroundColor(.white)
                                 .padding(.top, 40)
                                 .padding(.horizontal, 30)
                             
-                            TextField("", text: $username)
+                            TextField("", text: $viewModel.username)
+//                            TextField("", text: $username)
+                                .padding()
+                                .frame(width: 280, height: 40)
+                                .background(Color.white)
+                                .cornerRadius(60)
+                                .padding(.top, 10)
+                                .padding(.bottom, 20)
+                                .autocapitalization(.none)
+                                
+                            
+                            Text("Email")
+                                .font(.system(size: 20, weight: .bold))
+                                .frame(width: 280, alignment: .leading)
+                                .foregroundColor(.white)
+//                                .padding(.top, 40)
+                                .padding(.horizontal, 30)
+                            
+                            TextField("", text: $viewModel.email)
+//                            TextField("", text: $email)
                                 .padding()
                                 .frame(width: 280, height: 40)
                                 .background(Color.white)
@@ -50,14 +69,13 @@ struct SignUpView: View {
                                 .padding(.bottom, 20)
                                 .autocapitalization(.none)
                                 
-
-                                
                             Text("Password")
                                 .font(.system(size: 20, weight: .bold))
                                 .frame(width: 280, alignment: .leading)
                                 .foregroundColor(.white)
                                 
-                            SecureField("", text: $password)
+                            SecureField("", text: $viewModel.password)
+//                            SecureField("", text: $password)
                                 .padding()
                                 .frame(width: 280, height: 40)
                                 .background(Color.white)
@@ -66,7 +84,10 @@ struct SignUpView: View {
                                 .autocapitalization(.none)
                             
 
-                            NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+                            Button {
+                                Task{ try await viewModel.createUser() }
+                                
+                            } label: {
                                 Text("Sign Up")
                                     .font(.body)
                                     .fontWeight(.bold)
@@ -78,9 +99,10 @@ struct SignUpView: View {
                             }
 
                         }
-                        
-                        
-                    }
+                        .overlay(RoundedRectangle(cornerRadius: 60)
+                            .stroke(Color.white, lineWidth: 5)
+                        )
+
                     Image("orIcon")
                         .resizable()
                         .frame(width: 380, height: 70)
@@ -93,7 +115,7 @@ struct SignUpView: View {
                             .bold()
                         
                     
-                        NavigationLink(destination: ContentView()) {
+                        NavigationLink(destination: LoginView()) {
                             Text("LOG IN")
                                     .font(.headline)
                                     .foregroundColor(.white)
@@ -102,10 +124,11 @@ struct SignUpView: View {
                     }
                     .padding(.bottom, 1)
                     
+                    Spacer()
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .top)
 //                .border(Color.yellow, width: 2)
-                .offset(y: -100)
                 
             }
             
@@ -118,4 +141,5 @@ struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView()
     }
+    
 }

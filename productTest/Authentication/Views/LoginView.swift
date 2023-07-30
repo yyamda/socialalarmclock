@@ -1,16 +1,18 @@
 //
-//  ContentView.swift
+//  LoginView.swift
 //  productTest
 //
-//  Created by Yuta Yamada on 7/11/23.
+//  Created by Yuta Yamada on 7/28/23.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-    @State private var username = ""
-    @State private var password = ""
+struct LoginView: View {
+//    @State private var username = ""
+//    @State private var password = ""
     @State private var showingLoginScreen = false
+    @StateObject var viewModel = LoginViewModel()
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -42,7 +44,7 @@ struct ContentView: View {
                                 .padding(.top, 40)
                                 .padding(.horizontal, 30)
                             
-                            TextField("", text: $username)
+                            TextField("", text: $viewModel.email)
                                 .padding()
                                 .frame(width: 280, height: 40)
                                 .background(Color.white)
@@ -57,7 +59,7 @@ struct ContentView: View {
                                 .frame(width: 280, alignment: .leading)
                                 .foregroundColor(.white)
                                 
-                            SecureField("", text: $password)
+                            SecureField("", text: $viewModel.password)
                                 .padding()
                                 .frame(width: 280, height: 40)
                                 .background(Color.white)
@@ -65,7 +67,9 @@ struct ContentView: View {
                                 .padding(.bottom, 60)
                                 .autocapitalization(.none)
                             
-                            NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+                            Button {
+                                Task {try await viewModel.signIn() }
+                            } label: {
                                 Text("Log In")
                                     .font(.body)
                                     .fontWeight(.bold)
@@ -115,12 +119,10 @@ struct ContentView: View {
                 
                     }
 
-                    
-                    
+                    Spacer()
                 }
                 .frame(maxWidth: .infinity, alignment: .top)
 //                .border(Color.yellow, width: 2)
-                .offset(y: -100)
                 
             
             }
@@ -132,10 +134,8 @@ struct ContentView: View {
     }
 }
 
-
-
-struct Previews_ContentView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        LoginView()
     }
 }

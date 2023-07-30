@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserAccountView: View {
     @State private var myFriendsTab = true
+//    let user: User
     
     var body: some View {
         NavigationView {
@@ -212,6 +213,7 @@ struct UserAccountView: View {
 
 struct UserAccountView_Previews: PreviewProvider {
     static var previews: some View {
+//        UserAccountView(user: User.MOCK_USERS[0])
         UserAccountView()
     }
 }
