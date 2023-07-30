@@ -8,7 +8,8 @@
 import Foundation
 
 struct User: Identifiable, Hashable, Codable {
-    let id: String
+    // codable: allows conversion to and from JSON files
+    let id: String // "id" will not change after initialization
     var username: String
     var profileImageUrl: String?
     var fullname: String?

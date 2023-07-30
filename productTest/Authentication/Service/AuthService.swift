@@ -38,6 +38,7 @@ class AuthService {
     }
     
     @MainActor
+    // Used during "Sign Up" User
     func createUser(email: String, password: String, username: String) async throws {
 //        print("Email is \(email)")
 //        print("Password is \(password)")
@@ -57,12 +58,20 @@ class AuthService {
     }
     
     func loadUserData() async throws {
+        
+        // fetches currentUser (nil or a user)
         self.userSession = Auth.auth().currentUser
-        print("DEBUG: HELLOOO THIS IS WORKING")
+        print("DEBUG: HELLOOO userSession is enabled")
+        
+        // fetches current userId from userSession
         guard let currentUid = userSession?.uid else { return }
         print("DEBUG: \(currentUid)")
+        
+        // fetches the data via userId from firebase
         let snapshot = try await Firestore.firestore().collection("users").document(currentUid).getDocument()
-//        print("DEBUG: Snapshot data is \(snapshot.data())")
+        print("DEBUG: Snapshot data is \(snapshot.data())")
+        
+        // decodes the snapshot into a User object
         self.currentUser = try? snapshot.data(as: User.self)
     }
     

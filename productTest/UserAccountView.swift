@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserAccountView: View {
     @State private var myFriendsTab = true
-//    let user: User
+    let user: User
     
     var body: some View {
         NavigationView {
@@ -189,17 +189,17 @@ struct UserAccountView: View {
             .font(.largeTitle)
             
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-                        Image("BackButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                    }
-                    
-                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+//                        Image("BackButton")
+//                            .resizable()
+//                            .frame(width: 30, height: 30)
+//                    }
+//                    
+//                }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: SettingsView(user: user).navigationBarBackButtonHidden(true)) {
                         Image("CogButton")
                             .resizable()
                             .frame(width: 45, height: 45)
@@ -213,7 +213,7 @@ struct UserAccountView: View {
 
 struct UserAccountView_Previews: PreviewProvider {
     static var previews: some View {
-//        UserAccountView(user: User.MOCK_USERS[0])
-        UserAccountView()
+        UserAccountView(user: User.MOCK_USERS[0])
+
     }
 }

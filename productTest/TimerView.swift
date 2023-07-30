@@ -79,25 +79,25 @@ struct TimerView: View {
             .navigationBarTitleDisplayMode(.inline)
             .font(.largeTitle)
             
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-                        Text("Cancel")
-                            .bold()
-                            .foregroundColor(Color(red: 1, green: 0.85, blue: 0.33))
-                            .font(.system(size: 20))
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-                        Text("Add")
-                            .bold()
-                            .foregroundColor(Color(red: 1, green: 0.85, blue: 0.33))
-                            .font(.system(size: 20))
-                    }
-                }
-            
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+//                        Text("Cancel")
+//                            .bold()
+//                            .foregroundColor(Color(red: 1, green: 0.85, blue: 0.33))
+//                            .font(.system(size: 20))
+//                    }
+//                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+//                        Text("Add")
+//                            .bold()
+//                            .foregroundColor(Color(red: 1, green: 0.85, blue: 0.33))
+//                            .font(.system(size: 20))
+//                    }
+//                }
+//
+//            }
         }
         .environment(\.colorScheme, .dark)
     }

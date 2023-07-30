@@ -13,8 +13,10 @@ struct HomePageView: View {
     @State private var soundOpen = false
     @State private var timeOpen = false
     @State private var soundToggle = true
+    let user: User
     
-    init() {
+    init(user: User) {
+        self.user = user
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color(.white))]
 
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Helvetica-Bold", size: 26)!]
@@ -201,7 +203,7 @@ struct HomePageView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: UserAccountView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: UserAccountView(user: user).navigationBarBackButtonHidden(true)) {
                         Image("FriendsIcon")
                             .resizable()
                             .frame(width: 55, height: 35)
@@ -209,7 +211,7 @@ struct HomePageView: View {
                     }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: UserAccountView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: UserAccountView(user: user).navigationBarBackButtonHidden(true)) {
                         Image("AccountUserIcon")
                             .resizable()
                             .frame(width: 45, height: 45)
@@ -226,6 +228,6 @@ struct HomePageView: View {
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePageView()
+        HomePageView(user: User.MOCK_USERS[0])
     }
 }

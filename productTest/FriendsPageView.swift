@@ -508,15 +508,15 @@ struct FriendsPageView: View {
             .font(.largeTitle)
             
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-                        Image("BackButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .rotationEffect(.degrees(180))
-                    }
-                    
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+//                        Image("BackButton")
+//                            .resizable()
+//                            .frame(width: 30, height: 30)
+//                            .rotationEffect(.degrees(180))
+//                    }
+//                    
+//                }
                 
             }
 

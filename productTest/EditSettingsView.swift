@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EditSettingsView: View {
+    let user: User
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -66,7 +68,7 @@ struct EditSettingsView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: SettingsView(user: user).navigationBarBackButtonHidden(true)) {
                         Image("BackButton")
                             .resizable()
                             .frame(width: 30, height: 30)
@@ -83,6 +85,6 @@ struct EditSettingsView: View {
 
 struct EditSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        EditSettingsView()
+        EditSettingsView(user: User.MOCK_USERS[0])
     }
 }

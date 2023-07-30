@@ -16,8 +16,8 @@ struct ContentView: View {
             if viewModel.userSession == nil {
                 SignUpView()
                     .environmentObject(registrationViewModel)
-            } else {
-                HomePageView()
+            } else if let currentUser = viewModel.currentUser {
+                HomePageView(user: currentUser)
             }
         }
         

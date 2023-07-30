@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @StateObject var viewModel = ContentViewModel()
+    let user: User 
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -30,7 +33,7 @@ struct SettingsView: View {
                         .padding(.leading, 10)
                     Spacer()
                 }
-                NavigationLink(destination: EditSettingsView().navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: EditSettingsView(user: user).navigationBarBackButtonHidden(true)) {
                     HStack {
                         Image("Tyler")
                             .resizable()
@@ -89,7 +92,7 @@ struct SettingsView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: HomePageView(user: user).navigationBarBackButtonHidden(true)) {
                         Image("BackButton")
                             .resizable()
                             .frame(width: 30, height: 30)
@@ -107,6 +110,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(user: User.MOCK_USERS[0])
     }
 }

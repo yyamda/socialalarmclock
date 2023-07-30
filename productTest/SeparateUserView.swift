@@ -351,16 +351,16 @@ struct SeparateUserView: View {
             .navigationBarTitleDisplayMode(.inline)
             .font(.largeTitle)
             
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
-                        Image("BackButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                    }
-                    
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    NavigationLink(destination: HomePageView().navigationBarBackButtonHidden(true)) {
+//                        Image("BackButton")
+//                            .resizable()
+//                            .frame(width: 30, height: 30)
+//                    }
+//                    
+//                }
+//            }
         }
         .environment(\.colorScheme, .dark)
     }
