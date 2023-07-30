@@ -293,7 +293,7 @@ struct FriendsPageView: View {
                                                         .padding(.trailing, 10)
                                                         
                                                     HStack {
-                                                        NavigationLink(destination: SeparateUserView(separateUser: user).navigationBarBackButtonHidden(true))
+                                                        NavigationLink(destination: SeparateUserView(currentUser: user, separateUser: user).navigationBarBackButtonHidden(true))
                                                         {
                                                             VStack(alignment: .leading) {
                                                                 HStack {

@@ -14,6 +14,7 @@ struct SeparateUserView: View {
     @State private var callsSentOpen = false
     
     @StateObject var viewModel = SearchViewModel()
+    let currentUser: User
     let separateUser: User
     
     var body: some View {
@@ -353,6 +354,18 @@ struct SeparateUserView: View {
             .navigationBarTitle (Text("Wake Me Up!!"), displayMode: .inline)
             .navigationBarTitleDisplayMode(.inline)
             .font(.largeTitle)
+            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(destination: FriendsPageView(user: currentUser).navigationBarBackButtonHidden(true)) {
+                        Image("BackButton")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+                    
+                }
+                
+            }
         }
         .environment(\.colorScheme, .dark)
     }
@@ -360,6 +373,6 @@ struct SeparateUserView: View {
 
 struct SeparateUserView_Previews: PreviewProvider {
     static var previews: some View {
-        SeparateUserView(separateUser: User.MOCK_USERS[0])
+        SeparateUserView(currentUser: User.MOCK_USERS[0], separateUser: User.MOCK_USERS[0])
     }
 }
