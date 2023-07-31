@@ -17,7 +17,7 @@ struct ContentView: View {
                 SignUpView()
                     .environmentObject(registrationViewModel)
             } else if let currentUser = viewModel.currentUser {
-                HomePageView(user: currentUser)
+                HomePageView(currentUser: currentUser)
             }
         }
         

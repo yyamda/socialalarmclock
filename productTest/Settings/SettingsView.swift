@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var viewModel = ContentViewModel()
-    let user: User 
+    let currentUser: User 
     
     var body: some View {
         NavigationView {
@@ -33,7 +33,7 @@ struct SettingsView: View {
                         .padding(.leading, 10)
                     Spacer()
                 }
-                NavigationLink(destination: EditSettingsView(user: user).navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: EditSettingsView(currentUser: currentUser).navigationBarBackButtonHidden(true)) {
                     HStack {
                         Image("Tyler")
                             .resizable()
@@ -42,7 +42,10 @@ struct SettingsView: View {
                             .padding(.leading, 20)
                             .padding(.trailing, 15)
                         
-                        Text("Yuta Yamada")
+                        HStack {
+                            Text(currentUser.first)
+                            Text(currentUser.last)
+                        }
                         
                         Spacer()
                         Image("BackButton")
@@ -92,7 +95,7 @@ struct SettingsView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: HomePageView(user: user).navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: HomePageView(currentUser: currentUser).navigationBarBackButtonHidden(true)) {
                         Image("BackButton")
                             .resizable()
                             .frame(width: 30, height: 30)
@@ -110,6 +113,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(user: User.MOCK_USERS[0])
+        SettingsView(currentUser: User.MOCK_USERS[0])
     }
 }

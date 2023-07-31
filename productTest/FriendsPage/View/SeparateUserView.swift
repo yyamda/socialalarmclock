@@ -13,6 +13,7 @@ struct SeparateUserView: View {
     @State private var callsReceivedOpen = false
     @State private var callsSentOpen = false
     
+    @MainActor
     @StateObject var viewModel = SearchViewModel()
     let currentUser: User
     let separateUser: User
@@ -357,7 +358,7 @@ struct SeparateUserView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: FriendsPageView(user: currentUser).navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: FriendsPageView(currentUser: currentUser).navigationBarBackButtonHidden(true)) {
                         Image("BackButton")
                             .resizable()
                             .frame(width: 30, height: 30)
