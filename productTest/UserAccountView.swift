@@ -24,8 +24,12 @@ struct UserAccountView: View {
                     
                     // Full Name + User Info
                     VStack {
-                        Text(currentUser.first)
-                            .font(.system(size: 32, weight: .bold))
+                        HStack {
+                            Text(currentUser.first)
+                                .font(.system(size: 32, weight: .bold))
+                            Text(currentUser.last)
+                                .font(.system(size: 32, weight: .bold))
+                        }
                         Text(currentUser.username)
                             .foregroundColor(Color(red: 0.64, green: 0.64, blue: 0.64))
                             .font(.system(size: 20, weight: .bold))

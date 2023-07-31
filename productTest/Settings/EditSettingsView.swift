@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditSettingsView: View {
     let currentUser: User
@@ -26,29 +27,40 @@ struct EditSettingsView: View {
                 }
                 .padding(.top, 10)
                 
-                HStack {
-                    Image("Tyler")
-                        .resizable()
-                        .frame(width: 125, height: 125)
-                        .clipShape(RoundedRectangle(cornerRadius: 30))
-                        .padding(.leading, 45)
-                    VStack {
-                        Image("Camera")
-                            .resizable()
-                            .frame(width: 40, height: 30)
-                        
-                        Spacer()
+                PhotosPicker(selection: $viewModel.selectedImage) {
+                    HStack {
+                        if let image = viewModel.profileImage {
+                            image
+                                .resizable()
+                                .frame(width: 125, height: 125)
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .padding(.leading, 45)
+                        } else {
+                            Image(systemName: "person")
+                                .resizable()
+                                .frame(width: 125, height: 125)
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .padding(.leading, 45)
+                            
+                        }
+                        VStack {
+                            Image("Camera")
+                                .resizable()
+                                .frame(width: 40, height: 30)
+                            
+                            Spacer()
+                        }
+                        .frame(width: nil, height: 150)
                     }
-                    .frame(width: nil, height: 150)
+                    .padding(.bottom, 50)
                 }
-                .padding(.bottom, 50)
                 
                 HStack {
                     HStack {
                         Text("First:")
                             .font(.system(size: 20, weight: .bold))
                             .padding(.trailing, 5)
-                        Text(currentUser.first)
+                        TextField(currentUser.first, text: $viewModel.first)
                             .font(.system(size: 20))
                         
                         Spacer()
@@ -61,7 +73,7 @@ struct EditSettingsView: View {
                         Text("Last:")
                             .font(.system(size: 20, weight: .bold))
                             .padding(.trailing, 5)
-                        Text(currentUser.last)
+                        TextField(currentUser.last, text: $viewModel.last)
                             .font(.system(size: 20))
                         Spacer()
                     }
@@ -85,7 +97,10 @@ struct EditSettingsView: View {
                 .overlay(Rectangle().frame(height: 1).foregroundColor(Color.white), alignment: .bottom)
                 
                 Button {
-                    Task { try await viewModel.updateUserData() }
+                    Task {
+                        try await viewModel.updateUserData()
+                        dismiss()
+                    }
                 } label: {
                     Text("Save")
                         .font(.system(size: 26, weight: .semibold))

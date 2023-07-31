@@ -42,6 +42,7 @@ struct SettingsView: View {
                             .padding(.leading, 20)
                             .padding(.trailing, 15)
                         
+                        
                         HStack {
                             Text(currentUser.first)
                             Text(currentUser.last)
