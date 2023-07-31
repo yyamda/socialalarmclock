@@ -79,7 +79,7 @@ struct SignUpView: View {
                                 .font(.system(size: 20, weight: .bold))
                                 .frame(width: 280, alignment: .leading)
                                 .foregroundColor(.white)
-                                .padding(.top, 40)
+                                .padding(.top, 10)
                                 .padding(.horizontal, 30)
                             
                             

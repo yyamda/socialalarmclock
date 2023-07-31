@@ -286,12 +286,7 @@ struct FriendsPageView: View {
                                             user in
                                             if user != currentUser {
                                                 HStack {
-                                                    Image("Lucas")
-                                                        .renderingMode(.original)
-                                                        .resizable()
-                                                        .frame(width: 40, height: 40)
-                                                        .clipShape(Circle())
-                                                        .padding(.trailing, 10)
+                                                    CircularProfileImageView(displayUser: user, width: 40, height: 40)
                                                     
                                                     HStack {
                                                         NavigationLink(destination: SeparateUserView(currentUser: currentUser, separateUser: user).navigationBarBackButtonHidden(true))

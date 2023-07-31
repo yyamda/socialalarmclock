@@ -29,12 +29,8 @@ struct EditSettingsView: View {
                 
                 PhotosPicker(selection: $viewModel.selectedImage) {
                     HStack {
-                        if let image = viewModel.profileImage {
-                            image
-                                .resizable()
-                                .frame(width: 125, height: 125)
-                                .clipShape(RoundedRectangle(cornerRadius: 30))
-                                .padding(.leading, 45)
+                        if let image = currentUser.profileImageUrl {
+                            CircularProfileImageView(displayUser: currentUser, width: 125, height: 125)
                         } else {
                             Image(systemName: "person")
                                 .resizable()

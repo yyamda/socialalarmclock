@@ -35,10 +35,7 @@ struct SettingsView: View {
                 }
                 NavigationLink(destination: EditSettingsView(currentUser: currentUser).navigationBarBackButtonHidden(true)) {
                     HStack {
-                        Image("Tyler")
-                            .resizable()
-                            .frame(width: 80, height: 80)
-                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                        CircularProfileImageView(displayUser: currentUser, width: 80, height: 80)
                             .padding(.leading, 20)
                             .padding(.trailing, 15)
                         

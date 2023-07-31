@@ -16,11 +16,13 @@ struct UserAccountView: View {
             VStack {
                 // My Profile Tab
                 VStack {
-                    Image("Tyler")
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 30))
-                        .padding(.top, 30)
+                    CircularProfileImageView(displayUser: currentUser, width: 120, height: 120)
+
+//                       Image("Tyler")
+//                        .resizable()
+//                        .frame(width: 120, height: 120)
+//                        .clipShape(RoundedRectangle(cornerRadius: 30))
+//                        .padding(.top, 30)
                     
                     // Full Name + User Info
                     VStack {
