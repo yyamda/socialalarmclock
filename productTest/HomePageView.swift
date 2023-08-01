@@ -153,7 +153,7 @@ struct HomePageView: View {
                             
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        NavigationLink(destination: TimerView().navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: TimerView(currentUser: currentUser).navigationBarBackButtonHidden(true)) {
                             Text("+ add a time")
                                 .frame(width: 390, height: 40)
                                 .font(.system(size: 15, weight: .bold))
